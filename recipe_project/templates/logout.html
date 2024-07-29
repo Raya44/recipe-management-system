@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 ">
+    <div class="display-5 text-center mb-4  "> Login </div>
+    <div class="row flex justify-content-center">
+        <div class="col-4">
+            <h1> 
+                are you sure you want to log out 
+            </h1>
+            <form method="post" class="form-group">
+                {% csrf_token %}
+                
+                <input class="btn btn-danger form-control" type="submit" value="Logout" >
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}  

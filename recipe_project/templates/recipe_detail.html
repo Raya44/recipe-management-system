@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Recipe Detail{%endblock%}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ recipe.title }}</title>
+</head>
+<body>
+    <h1>{{ recipe.title }}</h1>
+    <p>{{ recipe.description }}</p>
+    <h2>Ingredients</h2>
+    <ul> 
+
+        {% for ingredient in recipe.ingredients.split('\n') %}
+            <li>{{ ingredient }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Instructions</h2>
+    <ol>
+        {% for instruction in recipe.instructions.split('\n') %}
+            <li>{{ instruction }}</li>
+        {% endfor %}
+    </ol>
+    {% if recipe.image %}
+        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+    {% endif %}
+</body>
+</html>
+{% endblock %}
+
+
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ recipe.title }}</h1>
+<p>Average Rating: {{ recipe.average_rating }}</p>
+
+{% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ rating_form.as_p }}
+        <button type="submit">Submit Rating</button>
+    </form>
+{% endif %}
+
+{% endblock %}
